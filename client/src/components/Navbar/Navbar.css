@@ -1,20 +1,17 @@
 .change .line1 {
-    transform: rotateZ(-405deg) translate(-4px, 4px) !important;
-  }
-  .change .line2 {
-    opacity: 0 !important;
-  }
-  .change .line3 {
-    transform: rotateZ(405deg) translate(-8px, -7px) !important;
-  }
-  
-  .linex{
-    transition: all 0.5s;
-  }
+  transform: rotateZ(-405deg) translate(-4px, 4px) !important;
+}
+.change .line2 {
+  opacity: 0 !important;
+}
+.change .line3 {
+  transform: rotateZ(405deg) translate(-8px, -7px) !important;
+}
 
-  .navbar::before{
-    z-index: -1000;
-  }
+.linex {
+  transition: all 0.5s;
+}
 
-
- 
+.navbar::before {
+  z-index: -1000;
+}
