@@ -24,4 +24,10 @@ export const Links = [
     title: "Contact Us",
     route: "/home",
   },
+  ,
+
+  {
+    title: "Login",
+    route: "/login",
+  },
 ];

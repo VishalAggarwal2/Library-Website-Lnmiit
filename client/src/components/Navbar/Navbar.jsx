@@ -9,7 +9,7 @@ import Logo from "./logo.jpg";
 const Navbar = () => {
   const [screenSize, setScreenSize] = useState(false);
   const [showmenu, setShowmenu] = useState(false);
-
+const [isVisible, setIsVisible] = useState(false);
   const changedisplay = () => {
     if (window.innerWidth <= 1024) setScreenSize(true);
     else {
@@ -57,7 +57,14 @@ const Navbar = () => {
               {Links?.map((e) => (
                 <li className="cursor-pointer relative inline-block group">
                   <Link to={e.route}>
-                    {e.title}
+                    {e.title=="Services"?<div>
+                      <span  onMouseEnter={() => setIsVisible(true)}
+            onMouseLeave={() => setIsVisible(false)}   >{e.title}</span>
+                      <ul    style={{ display: isVisible ? 'block' : 'none' ,position:"absolute" ,marginTop:"2rem"}}className="text-center">
+                        <li style={{"color":"red"}}>Find</li>
+                        <li style={{"color":"red"}}>Borrow</li>
+                      </ul>
+                    </div>:<span>{e.title}</span>}
                     <span className="absolute w-full transform scale-x-0 h-[2px] bottom-0 left-0 bg-white transform-origin-bottom-right transition-transform duration-250 ease-out group-hover:transform-origin-bottom-left group-hover:scale-x-100"></span>
                   </Link>
                 </li>
@@ -87,9 +94,9 @@ const Navbar = () => {
             {Links?.map((e) => (
               <li>
                 <Link to={e.route} onClick={() => setShowmenu(false)}>
-                  {e.title}
+{e.title}
                 </Link>
-              </li>
+             </li>
             ))}
           </ul>
           {/* <div className="flex flex-col gap-y-4 button-grp">
