@@ -15,3 +15,11 @@
 .navbar::before {
   z-index: -1000;
 }
+
+.submenu{
+color: red;
+}
+.submenu:hover{
+color: black;
+font-weight: bold;
+}

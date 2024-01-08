@@ -7,6 +7,12 @@ import { Links } from "../../data/data";
 import Logo from "./logo.jpg";
 
 const Navbar = () => {
+  const [visibleMenuIndex, setVisibleMenuIndex] = useState(null);
+
+  const handleMenuToggle = (index) => {
+    setVisibleMenuIndex(index === visibleMenuIndex ? null : index);
+  };
+
   const [screenSize, setScreenSize] = useState(false);
   const [showmenu, setShowmenu] = useState(false);
 const [isVisible, setIsVisible] = useState(false);
@@ -33,13 +39,10 @@ const [isVisible, setIsVisible] = useState(false);
       <div className={`flex text-xl px-6 py-4 justify-between items-center`}>
         {/* Logo */}
         <div className="-z-50">
-          <Link to="/">
-            {/* <h4 className="text-red-800 font-bold text-xl cursor-pointer"> */}
-              <img src={Logo} alt="LNMIIT" className="w-1/2"></img>
-            {/* </h4> */}
+          <Link to="/"><img src={Logo} alt="LNMIIT" className="w-1/2"></img>
           </Link>
         </div>
-        {/* Logo */}
+
 
         {/* Other navigation buttons */}
         <div className={``}>
@@ -49,32 +52,33 @@ const [isVisible, setIsVisible] = useState(false);
               status={showmenu}
             />
           ) : (
-            <ul
-              className={`flex gap-x-8 text-lg z-20 font-semibold text-white ${
-                screenSize ? "hidden" : "block"
-              }`}
-            >
-              {Links?.map((e) => (
-                <li className="cursor-pointer relative inline-block group">
-                  <Link to={e.route}>
-                    {e.title=="Services"?<div>
-                      <span  onMouseEnter={() => setIsVisible(true)}
-            onMouseLeave={() => setIsVisible(false)}   >{e.title}</span>
-                      <ul    style={{ display: isVisible ? 'block' : 'none' ,position:"absolute" ,marginTop:"2rem"}}className="text-center">
-                        <li style={{"color":"red"}}>Find</li>
-                        <li style={{"color":"red"}}>Borrow</li>
-                      </ul>
-                    </div>:<span>{e.title}</span>}
-                    <span className="absolute w-full transform scale-x-0 h-[2px] bottom-0 left-0 bg-white transform-origin-bottom-right transition-transform duration-250 ease-out group-hover:transform-origin-bottom-left group-hover:scale-x-100"></span>
-                  </Link>
-                </li>
-              ))}
-              {/* <li className="flex items-center text-lg font-normal gap-x-4 button-grp text-richblack-100">
-            <Link to="/login" onClick={() => setShowmenu(false)}>
-                <button className="text-white">Register</button>
-              </Link>
-            </li>  */}
-            </ul>
+            <ul style={{color:"white",display:"flex",flexDirection:"row",justifyContent:"space-evenly",gap:"20px"}}>
+      {Links?.map((e, index) => (
+        <li key={index} className="cursor-pointer relative inline-block group">
+          <Link to={e.route} onClick={() => handleMenuToggle(index)}>
+            <div>
+              <span  >{e.title}</span>
+            </div>
+          </Link>
+          <ul
+            style={{
+              display: visibleMenuIndex === index ? 'block' : 'none',
+              position: 'absolute',
+              marginTop: '2rem',
+              textAlign: 'start',
+              width: 'fit-content'
+            }}
+            className="text-center"
+          >
+            {e.submenu.map((ele, subIndex) => (
+              <li key={subIndex} className="submenu">
+                {ele.name}
+              </li>
+            ))}
+          </ul>
+        </li>
+      ))}
+    </ul>
           )}
         </div>
         {/* Other navigation buttons */}
@@ -87,18 +91,34 @@ const [isVisible, setIsVisible] = useState(false);
         }`}
       >
         <div className="mt-24 text-center">
-          <ul className="flex flex-col gap-y-4">
-            {/* <li>
-              <Link to="/" onClick={()=>setShowmenu(false)}>Home</Link>
-            </li> */}
-            {Links?.map((e) => (
-              <li>
-                <Link to={e.route} onClick={() => setShowmenu(false)}>
-{e.title}
-                </Link>
-             </li>
+        <ul style={{color:"white",textAlign:"center",display:"flex",flexDirection:"column",justifyContent:"space-evenly",gap:"20px"}}>
+      {Links?.map((e, index) => (
+        <li key={index} className="cursor-pointer relative inline-block group">
+          <Link to={e.route} onClick={() => handleMenuToggle(index)}>
+            <div>
+              <span  >{e.title}</span>
+            </div>
+          </Link>
+          <ul
+            style={{
+              display: visibleMenuIndex === index ? 'block' : 'none',
+              position: 'relative',
+              marginTop: '2rem',
+              textAlign: 'start',
+              width: 'fit-content',
+    margin:"auto"
+            }}
+            className="text-center"
+          >
+            {e.submenu.map((ele, subIndex) => (
+              <li key={subIndex} className="submenu">
+                {ele.name}
+              </li>
             ))}
           </ul>
+        </li>
+      ))}
+    </ul>
           {/* <div className="flex flex-col gap-y-4 button-grp">
           <Link to="/login" onClick={() => setShowmenu(false)}>
                 <button className="text-white">Sign in</button>
