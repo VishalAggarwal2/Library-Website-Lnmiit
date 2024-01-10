@@ -55,7 +55,7 @@ const [isVisible, setIsVisible] = useState(false);
             <ul style={{color:"white",display:"flex",flexDirection:"row",justifyContent:"space-evenly",gap:"20px"}}>
       {Links?.map((e, index) => (
         <li key={index} className="cursor-pointer relative inline-block group">
-          <Link to={e.route} onClick={() => handleMenuToggle(index)}>
+          <Link to={e.route}   onClick={() => handleMenuToggle(index)}>
             <div>
               <span  >{e.title}</span>
             </div>
@@ -66,7 +66,8 @@ const [isVisible, setIsVisible] = useState(false);
               position: 'absolute',
               marginTop: '2rem',
               textAlign: 'start',
-              width: 'fit-content'
+              width: 'fit-content',
+              boxSizing:"border-box"
             }}
             className="text-center"
           >
@@ -105,7 +106,8 @@ const [isVisible, setIsVisible] = useState(false);
               position: 'relative',
               marginTop: '2rem',
               textAlign: 'start',
-              width: 'fit-content',
+              width: '200px',
+
     margin:"auto"
             }}
             className="text-center"

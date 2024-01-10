@@ -17,9 +17,9 @@
 }
 
 .submenu{
-color: red;
+color:rgb(250, 0, 15);
 }
 .submenu:hover{
 color: black;
-font-weight: bold;
+transform: scale(1.1);
 }
